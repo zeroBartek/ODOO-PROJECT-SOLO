@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_bike_rental_pricing_list" model="ir.ui.view">
+        <field name="name">bike_rental_pricing.list</field>
+        <field name="model">rental.pricing</field>
+        <field name="arch" type="xml">
+            <list string="Tarifs de location">
+                <field name="category_id"/>
+                <field name="billing_unit"/>
+                <field name="price"/>
+                <field name="active"/>
+                <field name="vip_price"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_bike_rental_pricing_form" model="ir.ui.view">
+        <field name="name">bike_rental_pricing.form</field>
+        <field name="model">rental.pricing</field>
+        <field name="arch" type="xml">
+            <form string="Tarif de location">
+                <sheet>
+                    <group>
+                        <field name="category_id"/>
+                        <field name="billing_unit"/>
+                        <field name="price"/>
+                        <field name="active"/>
+                        <field name="vip_price"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bike_rental_pricing" model="ir.actions.act_window">
+        <field name="name">Tarifs de location</field>
+        <field name="res_model">rental.pricing</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

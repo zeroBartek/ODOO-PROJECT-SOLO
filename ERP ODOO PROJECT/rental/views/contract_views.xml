@@ -1,0 +1,160 @@
+<odoo>
+    <record id="view_bike_rental_contract_list" model="ir.ui.view">
+        <field name="name">bike_rental_contract.list</field>
+        <field name="model">rental.contract</field>
+        <field name="arch" type="xml">
+            <list string="Contrats de location">
+                <field name="client_id"/>
+                <field name="bike_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="billing_unit"/>
+                <field name="amount_total"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_bike_rental_contract_form" model="ir.ui.view">
+        <field name="name">bike_rental_contract.form</field>
+        <field name="model">rental.contract</field>
+        <field name="arch" type="xml">
+            <form string="Contrat de location" create="true" edit="true">
+                <header>
+                    <button name="action_confirm"
+                            type="object"
+                            string="Confirmer"
+                            invisible="state != 'draft'"/>
+
+                    <button name="action_start"
+                            type="object"
+                            string="Démarrer"
+                            invisible="state != 'confirmed'"/>
+
+                    <button name="action_close"
+                            type="object"
+                            string="Clôturer"
+                            invisible="state != 'ongoing'"/>
+
+                    <button name="action_cancel"
+                            type="object"
+                            string="Annuler"
+                            invisible="state != 'draft'"/>
+
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,confirmed,ongoing,done,Cancelled"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="client_id"/>
+                            <field name="bike_id" domain="[('for_rent','=',True)]"/>
+                            <field name="billing_unit"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="price_unit"/>
+                            <field name="amount_total" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="invoice_id" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bike_rental_contract_search" model="ir.ui.view">
+        <field name="name">bike_rental_contract.search</field>
+        <field name="model">rental.contract</field>
+        <field name="arch" type="xml">
+            <search string="Contrats de location">
+                <field name="client_id"/>
+                <field name="bike_id"/>
+                <filter string="Confirmé" name="confirmed" domain="[('state','=','confirmed')]"/>
+                <filter string="Annulé" name="cancelled" domain="[('state','=','cancelled')]"/>
+                <filter string="En cours" name="ongoing" domain="[('state','=','ongoing')]"/>
+                <filter string="Terminés" name="done" domain="[('state','=','done')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_bike_rental_contract" model="ir.actions.act_window">
+        <field name="name">Contrats de location</field>
+        <field name="res_model">rental.contract</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p>Gérez ici les contrats de location de vélos.</p>
+        </field>
+    </record>
+
+
+    <record id="action_report_contract" model="ir.actions.report">
+        <field name="name">Rapport du Contrat de location</field>
+        <field name="model">rental.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">rental.report_contract</field> 
+        <field name="report_file">rental.report_contract</field>
+        <field name="binding_model_id" ref="model_rental_contract"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    
+    <template id="report_contract">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Rapport du Contrat de location</h2>
+
+                        <p>
+                            <strong>Client :</strong>
+                            <span t-field="doc.client_id"/>
+                        </p>
+
+                        <p>
+                            <strong>Vélo :</strong>
+                            <span t-field="doc.bike_id"/>
+                        </p>
+
+                        <p>
+                            <strong>Début :</strong>
+                            <span t-field="doc.date_start"/>
+                        </p>
+
+                        <p>
+                            <strong>Fin :</strong>
+                            <span t-field="doc.date_end"/>
+                        </p>
+
+                        <p>
+                            <strong>Unité de temps de location :</strong>
+                            <span t-field="doc.billing_unit"/>
+                        </p>
+
+                        <p>
+                            <strong>Prix unitaire :</strong>
+                            <span t-field="doc.price_unit"/>
+                        </p>
+
+                        <p>
+                            <strong>Montant total :</strong>
+                            <span t-field="doc.amount_total"/>
+                        </p>
+
+                        <p>
+                            <strong>Statut :</strong>
+                            <span t-field="doc.state"/>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

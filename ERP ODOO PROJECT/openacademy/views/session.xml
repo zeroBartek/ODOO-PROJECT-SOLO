@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="session_model_action" model="ir.actions.act_window">
+        <field name="name">Session</field>
+        <field name="res_model">openacademy.session</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

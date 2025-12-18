@@ -1,0 +1,35 @@
+<odoo>
+
+<record id="view_partner_form_rental" model="ir.ui.view">
+    <field name="name">res.partner.form.rental</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+        <!-- Ajoute le champ après 'is_company' -->
+        <xpath expr="//field[@name='category_id']" position="after">
+            <field name="is_rental_client"/>
+                    <field name="is_vip"/>
+        </xpath>
+    </field>
+</record>
+
+    <record id="view_partner_list_rental" model="ir.ui.view">
+        <field name="name">res.partner.list.rental</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="is_rental_client"/>
+                <field name="is_vip"/>
+            </xpath>
+        </field>
+    </record>
+
+
+<record id="action_rental_client" model="ir.actions.act_window">
+    <field name="name">Clients de location</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">list,form</field>
+    <field name="domain">[('is_rental_client','=',True)]</field>
+</record>
+</odoo>

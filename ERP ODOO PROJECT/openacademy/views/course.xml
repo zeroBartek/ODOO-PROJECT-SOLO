@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="course_model_action" model="ir.actions.act_window">
+        <field name="name">Course</field>
+        <field name="res_model">openacademy.course</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="form_course">
+        <field name="name">Form Course</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <list string="Courses">
+                <field name="name" string="Course name"/>
+                <field name="description" string="Description"/>
+            </list>
+        </field>
+    </record>
+</odoo>
