@@ -17,10 +17,11 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','product',"account",'stock','purchase','sale_management','contacts', 'website_sale','point_of_sale'],
+    'depends': ['base','product',"account",'stock','purchase','sale_management','contacts','point_of_sale'],
 
     # always loaded
     'data': [
+        'security/rental_groups.xml',
         'security/ir.model.access.csv',
         'views/client_views.xml',
         'views/bike_views.xml',
@@ -29,7 +30,8 @@ Long description of module's purpose
         'views/reporting_views.xml',
         'views/views.xml',
         'views/templates.xml',
-
+        'wizard/rental_invoice_wizard.xml',
+        
     ],
     # only loaded in demonstration mode
     'demo': [

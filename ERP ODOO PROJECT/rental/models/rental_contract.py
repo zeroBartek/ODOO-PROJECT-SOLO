@@ -95,24 +95,35 @@ class rental_contract(models.Model):
             else:
                 rec.amount_total = 0
 
+    def action_open_invoice_wizard(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Créer la facture',
+            'res_model': 'rental.invoice.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'active_id': self.id,
+                'active_model': 'rental.contract',
+            },
+        }
+
     def action_confirm(self):
-        for rec in self:
-            rec._create_invoice()
-            rec.state = 'confirmed'
+        self.state = 'confirmed'
 
     def action_start(self):
         self.state = 'ongoing'
 
     def action_close(self):
-        self.state = 'done'
+        if len(self) != 1:
+            raise UserError("Veuillez confirmer un seul contrat à la fois.")
+        return self.action_open_invoice_wizard()
 
     def action_cancel(self):
         self.state = 'Cancelled'
 
     def _create_invoice(self):
-        Account = self.env['account.account']
-        Journal = self.env['account.journal']
-
         for rec in self:
             if rec.invoice_id:
                 return rec.invoice_id
@@ -165,9 +176,6 @@ class rental_contract(models.Model):
             for c in bike_contracts:
                 if c.date_start:
                     ds = c.date_start.date()
-
                     if ds.month == month and ds.year == year:
                         rec.rental_count_month += 1
                         rec.rental_income_month += c.amount_total
-
-            

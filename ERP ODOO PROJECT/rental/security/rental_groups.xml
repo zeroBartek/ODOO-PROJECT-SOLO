@@ -1,0 +1,5 @@
+<odoo>
+  <record id="group_rental_vendor" model="res.groups">
+    <field name="name">Vendeur</field>
+  </record>
+</odoo>

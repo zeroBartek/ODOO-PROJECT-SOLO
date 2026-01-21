@@ -3,7 +3,7 @@ from odoo import models, fields
 class bike(models.Model):
     _inherit = 'product.template'
 
-    for_rent = fields.Boolean(default=False)
+    for_rent = fields.Boolean(string="A louer",default=False)
     size = fields.Char("Taille S,M ou L")
     couleur = fields.Char("Couleur du vélo")
     condition = fields.Selection([
@@ -15,4 +15,4 @@ class bike(models.Model):
         ('available', 'Disponible'),
         ('rented', 'Loué'),
         ('maintenance', 'En maintenance'),
-    ], default='available')
+    ], default='available',string="Statut de Location")
