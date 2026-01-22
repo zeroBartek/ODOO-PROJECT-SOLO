@@ -15,4 +15,4 @@ class bike(models.Model):
         ('available', 'Disponible'),
         ('rented', 'Loué'),
         ('maintenance', 'En maintenance'),
-    ], default='available',string="Statut de Location")
+    ], default='available',string="Statut")

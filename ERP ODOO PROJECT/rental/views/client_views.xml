@@ -5,7 +5,6 @@
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_partner_form"/>
     <field name="arch" type="xml">
-        <!-- Ajoute le champ après 'is_company' -->
         <xpath expr="//field[@name='category_id']" position="after">
             <field name="is_rental_client"/>
                     <field name="is_vip"/>

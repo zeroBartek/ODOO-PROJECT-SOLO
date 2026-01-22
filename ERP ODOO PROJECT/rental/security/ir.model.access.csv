@@ -1,6 +1,12 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_rental_contract_user,rental.contract user,model_rental_contract,rental.group_rental_vendor,1,1,1,0
-access_rental_invoice_wizard_user,rental.invoice.wizard user,model_rental_invoice_wizard,rental.group_rental_vendor,1,1,1,1
-access_rental_pricing_user,rental.pricing user,model_rental_pricing,rental.group_rental_vendor,1,0,0,0
-access_product_template_ro_worker,product.template ro,product.model_product_template,rental.group_rental_vendor,1,0,0,0
-access_product_product_ro_worker,product.product ro,product.model_product_product,rental.group_rental_vendor,1,0,0,0
+access_rental_contract_vendor,rental.contract vendor,model_rental_contract,rental.group_rental_vendor,1,1,1,0
+access_rental_invoice_wizard_vendor,rental.invoice.wizard vendor,model_rental_invoice_wizard,rental.group_rental_vendor,1,1,1,1
+
+access_product_template_ro_vendor,product.template ro vendor,product.model_product_template,rental.group_rental_vendor,1,0,0,0
+access_product_product_ro_vendor,product.product ro vendor,product.model_product_product,rental.group_rental_vendor,1,0,0,0
+
+access_res_partner_vendor,res.partner vendor,base.model_res_partner,rental.group_rental_vendor,1,1,1,0
+
+access_rental_contract_admin,rental.contract admin,model_rental_contract,base.group_system,1,1,1,1
+access_rental_pricing_admin,rental.pricing admin,model_rental_pricing,base.group_system,1,1,1,1
+access_rental_invoice_wizard_admin,rental.invoice.wizard admin,model_rental_invoice_wizard,base.group_system,1,1,1,1

@@ -2,40 +2,49 @@
 <odoo>
   <data>
 
-    <menuitem id="menu_bike_root" name="Magasin de Vélos" sequence="10"/>
+    <menuitem id="menu_bike_root"
+              name="Magasin de Vélos"
+              sequence="10"/>
 
     <menuitem id="menu_bike_rental"
               name="Location"
-              parent="menu_bike_root"/>
+              parent="menu_bike_root"
+              groups="rental.group_rental_vendor,base.group_system"/>
 
     <menuitem id="menu_bike_rental_contracts"
               name="Contrats de location"
               parent="menu_bike_rental"
-              action="action_bike_rental_contract"/>
+              action="action_bike_rental_contract"
+              groups="rental.group_rental_vendor,base.group_system"/>
 
     <menuitem id="menu_bike_rental_pricing"
               name="Tarifs de location"
               parent="menu_bike_rental"
-              action="action_bike_rental_pricing"/>
+              action="action_bike_rental_pricing"
+              groups="base.group_system"/>
 
-    <menuitem id="menu_rental_client" 
-              name="Clients" 
-              parent="menu_bike_root" 
-              action="action_rental_client"/>
+    <menuitem id="menu_rental_client"
+              name="Clients"
+              parent="menu_bike_root"
+              action="action_rental_client"
+              groups="rental.group_rental_vendor,base.group_system"/>
 
     <menuitem id="menu_rental_reporting"
               name="Reporting"
-              parent="menu_bike_root"/>
+              parent="menu_bike_root"
+              groups="base.group_system"/>
 
     <menuitem id="menu_rental_reporting_history"
               name="Historique des locations"
               parent="menu_rental_reporting"
-              action="action_rental_reporting_history"/>
+              action="action_rental_reporting_history"
+              groups="base.group_system"/>
 
     <menuitem id="menu_rental_reporting_data"
               name="Données de location"
               parent="menu_rental_reporting"
-              action="action_rental_reporting_data"/>
+              action="action_rental_reporting_data"
+              groups="base.group_system"/>
 
   </data>
 </odoo>

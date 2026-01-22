@@ -1,6 +1,5 @@
 <odoo>
 
-    <!-- Vue Liste : Historique des locations -->
     <record id="view_rental_reporting_history_list" model="ir.ui.view">
         <field name="name">rental.contract.reporting.history.list</field>
         <field name="model">rental.contract</field>
@@ -23,13 +22,10 @@
         <field name="model">rental.contract</field>
         <field name="arch" type="xml">
             <graph string="Statistiques de location" type="bar">
-                <!-- Axe X : mois de location -->
                 <field name="date_start" type="row" interval="month"/>
 
-                <!-- Axe Y : nb de locations -->
                 <field name="id" type="measure"/>
 
-                <!-- Groupement par vélo -->
                 <field name="bike_id" type="col"/>
             </graph>
         </field>
@@ -37,7 +33,6 @@
 
 
 
-    <!-- Action : Historique des locations -->
     <record id="action_rental_reporting_history" model="ir.actions.act_window">
         <field name="name">Historique des locations</field>
         <field name="res_model">rental.contract</field>
